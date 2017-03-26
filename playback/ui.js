@@ -62,6 +62,7 @@ var screen_width_input, screen_height_input, screen_width, screen_height, screen
 var fullscreen = false, fullscreen_input = false;
 var start_disabled = false;
 var vnc_screen_disabled = 1;
+var fullscreen_disabled = 0;
 
 var default_canvas_height = 20;
 var prev_canvas_height;
@@ -385,6 +386,9 @@ function full_screen() {
 }
 
 function check_fullscreen() {
+  if (fullscreen_disabled)
+    return;
+
   if (window.outerWidth === screen.width && window.outerHeight === screen.height) {
     if (screen.width >= prev_screen_width && screen.height >= prev_screen_height)
       set_fs();
@@ -1183,6 +1187,7 @@ function show_records_list() {
     document.body.style.overflow = 'auto';
     vnc_records.style.height = 'auto';
     play_bar.style.display = 'none';
+    fullscreen_disabled = 1;
   }
 
   var tmp = fullscreen_input && window.innerWidth < screen.width ? window.innerWidth : window.innerWidth - 30;
