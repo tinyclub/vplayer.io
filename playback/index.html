@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="./ui.css">
+	<link rel="stylesheet" href="./playbar.css">
+	<link rel="stylesheet" href="./records.css">
+	<title>vplayer.io -- noVNC Player</title>
+    </head>
+
+    <script type="text/javascript">
+	var INCLUDE_URI = "../";
+	var DATA_INCLUDE_URI = "./";
+        var VPLAYER_URI = "./index.html";
+	//var FULL_SCREEN = 1;
+	//var DATA_URI = "linux-lab.slice";
+	//var INCLUDE_URI= "http://example.com/";
+	//var DATA_INCLUDE_URI= "http://example.com/";
+    </script>
+
+    <body>
+	<div id="VNC_main">
+
+	<div id="VNC_playbar">
+	  <div id="left_playbar">
+	    <span id="current_time" title="Current time"></span>
+	  </div>
+
+	  <div id="middle_playbar">
+	    <input id="trackBar" type="range" min="0" max="10" step="1" value="0" title="Drag or Click to the target frame" />
+	  </div>
+
+	  <div id="right_playbar">
+	    <span id="total_time" title="Total time"></span>
+	    <span id="fsBtn" title="Enter Fullscreen">[+]</span>
+	    <span id="moreBtn" title="Show noVNC Sessions">...</span>
+	  </div>
+	</div>
+
+	<div id="VNC_screen">
+	    <canvas id="VNC_canvas" width="100%">
+		Canvas not supported.
+	    </canvas>
+	    <canvas id="VNC_canvas_backup" width="100%">
+		Canvas not supported.
+	    </canvas>
+	    <div id="VNC_status">Loading ...</div>
+	</div>
+
+	<div id="VNC_records">
+	  <h1> vplayer.io - noVNC Player </h1>
+	  <p>
+            <a href="https://github.com/tinyclub/vplayer.io">Vplayer.io</a> |
+	    <a href="http://showdesk.io">Showdesk.io<a/> |
+	    <a href="https://github.com/tinyclub/pyvnc2swf">Pyvnc2swf<a/> |
+            <a href="https://github.com/tinyclub/cloud-ubuntu">Cloud Ubuntu</a> |
+         </p>
+
+	 <hr>
+            <iframe src="http://vplayer.io/examples/embed.html" width="666" height="500" marginheight="0" marginwidth="0" frameborder="1" scrolling="no" border="0"></iframe>
+	 <hr>
+
+	 <p>Based on <a href='https://github.com/novnc/noVNC/'>noVNC</a> and Powered by <a href='http://tinylab.org'>TinyLab.org</a></p>
+	</div>
+
+      </div>
+    </body>
+
+    <script src="../core/util.js"></script>
+    <script src="../app/webutil.js"></script>
+    <script src="./ui.js"></script>
+</html>

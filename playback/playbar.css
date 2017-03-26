@@ -1,0 +1,80 @@
+div a { text-decoration: none; outline: none }
+a,input,span { vertical-align:middle; font-size: 0.75em; }
+
+#VNC_playbar { display: block; visibility: hidden; padding-top: 0.125em; padding-bottom: 0.125em; text-align: center; white-space:nowrap; z-index: 2; background-color: transparent}
+#left_playbar { float: left; background-color: transparent }
+#middle_playbar { float: left; background-color: transparent }
+#right_playbar { float: right; background-color: transparent }
+
+#trackBar { width: 98%; margin-left: 1px; margin-right: 1px; }
+#fsBtn { margin-left: 12px; margin-right: 1px; cursor: pointer; color: #666 }
+#moreBtn { margin-left: 12px; margin-right: 5px; cursor: pointer; color: #666; display: none; margin-top: -0.375em }
+#current_time, #total_time { min-width: 45px; margin-left: 1px; margin-right: 1px; }
+#total_time { color: #ff6666 }
+
+/*去除默认样式*/
+input[type=range] {
+    -webkit-appearance: none;
+    opacity: 0.8;
+    vertical-align: middle;
+    width: 100%;
+    height: 0.25em;
+    border-radius: 0.25em;
+    background: linear-gradient(to right, #00aa00, #ff6666 0%, #ff6666);
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    -moz-border-radius: 0.25em;
+}
+
+ /*给滑动轨道(track)添加样式*/
+input[type=range]::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 0.25em;
+    border-radius: 0.25em; /*将轨道设为圆角的*/
+    background-color: transparent;
+}
+input[type=range]::-moz-range-track {
+    -moz-appearance: none;
+    height: 0.25em;
+    border-radius: 0.25em; /*将轨道设为圆角的*/
+    background-color: transparent;
+}
+input[type=range]::-moz-range-progress {
+    -moz-appearance: none;
+    height: 0.25em;
+    border-radius: 0.25em; /*将轨道设为圆角的*/
+    background-color: transparent;
+}
+
+/*原始的控件获取到焦点时，会显示包裹整个控件的边框，所以还需要把边框取消。*/
+input[type=range]:focus {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+}
+ /*给滑块(thumb)添加样式*/
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 0.75em;
+    width: 0.75em;
+    background: rgba(0,170,0,0.9);
+    margin-top: -0.25em; /*使滑块超出轨道部分的偏移量相等*/
+    border-radius: 50%; /*外观设置为圆形*/
+    border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+    box-shadow: 0 0 0.75em #ddd; /*添加底部阴影*/
+}
+
+input[type=range]::-moz-range-thumb {
+    -moz-appearance: none;
+    height: 0.75em;
+    width: 0.75em;
+    background: rgba(0,170,0,0.9);
+    border-radius: 50%; /*外观设置为圆形*/
+    border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+    box-shadow: 0 0 0.75em #ddd; /*添加底部阴影*/
+}

@@ -1,0 +1,12 @@
+#VNC_records { width: 100%; height: 500px; margin-bottom: 16px; overflow: auto; }
+
+#VNC_records a { text-decoration: none; outline: none; }
+#VNC_records table { border: 1px solid #333; border-spacing: 0; border-collapse: collapse; width: 100%; }
+#VNC_records th, td { padding-left: 2px; padding-right: 2px; padding-top: 10px; padding-bottom: 10px;
+     border: 1px solid #aaa; display: table-cell;
+     text-align: center; max-width: 100px; }
+#VNC_records td { font-size: 80%; overflow: hidden; text-overflow: ellipsis }
+#VNC_records tr.head { background-color: #ccc; }
+#VNC_records tr.odd { background-color: #eee; }
+#VNC_records tr.even { background-color: #fff; }
+#VNC_records tr:hover { background-color: #666; }

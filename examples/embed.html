@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<title>vplayer.io -- noVNC Player</title>
+    </head>
+
+    <script src="../jquery/jquery-1.10.1.min.js"></script>
+    <script src="../iframeresizer/iframeResizer.min.js"></script>
+    <script>
+	function resize_iframe() {
+	    iFrameResize({
+		log: false,
+		autoResize: true,
+		interval: -1,
+		minHeight: 300,
+		heightCalculationMethod: "lowestElement",
+	    });
+	}
+        $(document).ready(function () {
+            resize_iframe();
+        });
+    </script>
+
+    <body>
+      <iframe src="http://vplayer.io?data=vplayer.io.slice&f=1" width="100%" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" border="0" allowfullscreen></iframe>
+    </body>
+</html>
