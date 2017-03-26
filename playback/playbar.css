@@ -8,7 +8,7 @@ a,input,span { vertical-align:middle; font-size: 0.75em; }
 
 #trackBar { width: 98%; margin-left: 1px; margin-right: 1px; }
 #fsBtn { margin-left: 12px; margin-right: 1px; cursor: pointer; color: #666 }
-#moreBtn { margin-left: 12px; margin-right: 5px; cursor: pointer; color: #666; display: none; margin-top: -0.375em }
+#moreBtn { margin-left: 12px; margin-right: 5px; cursor: pointer; color: #666; margin-top: -0.375em }
 #current_time, #total_time { min-width: 45px; margin-left: 1px; margin-right: 1px; }
 #total_time { color: #ff6666 }
 

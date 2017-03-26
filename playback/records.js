@@ -5,14 +5,20 @@
  * Version: 0.1
  */
 
-function list_records(theme) {
-  var target = document.getElementById('VNC_records');
-
+function has_record_list() {
   if (typeof(VNC_record_data) === 'undefined'
       || typeof(VNC_record_dir) === 'undefined') {
     return false;
   }
 
+  return true;
+}
+
+function list_records(theme) {
+  if (!has_record_list())
+    return false;
+
+  var target = document.getElementById('VNC_records');
   var data = new Array();
   var record = VNC_record_data;
   var record_dir = VNC_record_dir;
@@ -64,7 +70,6 @@ function list_records(theme) {
 
   data.push("</table>")
 
-  more_btn.style.display = "inline-block";
   target.innerHTML = data.join('');
   return true;
 }

@@ -32,6 +32,8 @@ var ttime = document.getElementById('total_time');
 var vnc_records = document.getElementById('VNC_records');
 var vnc_status = document.getElementById('VNC_status');
 
+var vnc_default_video = document.getElementById('VNC_default_video');
+
 var play_bar = document.getElementById('VNC_playbar');
 var left_play_bar = document.getElementById('left_playbar');
 var right_play_bar = document.getElementById('right_playbar');
@@ -103,9 +105,9 @@ function show_records() {
   // console.info("show_records");
   stop();
   
-  if (vnc_records.innerHTML.length < 10)
+  if (has_record_list())
     draw_records();
-  
+
   vnc_records.style.width = vnc_screen.offsetWidth + 'px';
   if (vnc_screen.offsetHeight > 100)
     vnc_records.style.height = vnc_screen.offsetHeight + 'px';
@@ -1030,7 +1032,7 @@ function update_screensize() {
   if (parseInt(h) > 100)
     vnc_records.style.height = h;
   else
-    vnc_records.style.height = (windows.innerHeight - play_bar.offsetHeight - 2) + 'px';
+    vnc_records.style.height = (window.innerHeight - play_bar.offsetHeight - 2) + 'px';
 
   play_bar.style.width = w;
 
@@ -1182,32 +1184,37 @@ function load_framedata(part) {
 
 function show_records_list() {
   //console.info("show_records_list");
-  res = list_records();
-  if (res === false) {
-    document.body.style.overflow = 'auto';
-    vnc_records.style.height = 'auto';
-    play_bar.style.display = 'none';
-    fs_btn.style.display = 'none';
-    more_btn.style.display = 'none';
-    fullscreen_disabled = 1;
-  }
+  list_records(); 
 
   var tmp = fullscreen_input && window.innerWidth < screen.width ? window.innerWidth : window.innerWidth - 30;
-  if (res === true) {
-    vnc_records.style.width = tmp + "px";
-    vnc_records.style.height = window.innerHeight + "px";
-  }
+  vnc_records.style.width = tmp + "px";
+  vnc_records.style.height = window.innerHeight + "px";
   vnc_screen.style.display = "none";
   vnc_records.style.display = "block";
+}
+
+function show_default_video() {
+  document.body.style.overflow = 'auto';
+  vnc_records.style.height = 'auto';
+  play_bar.style.display = "none";
+  vnc_screen.style.display = "none";
+  fullscreen_disabled = 1;
+
+  vnc_default_video.style.display = 'block';
 }
 
 window.onscriptsload = function () {
   vnc_status.textContent = "Loaded";
 
+  if (!has_record_list())
+    more_btn.style.display = "none";
+
   if (fname)
     init_framedata();
-  else
+  else if (has_record_list())
     show_records_list();
+  else
+    show_default_video();
 }
 
 function load_record(fname) {

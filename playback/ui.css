@@ -4,9 +4,9 @@ body, #main, #VNC_playbar { background-color: transparent; }
 
 #VNC_main { overflow: hidden; padding: 0px; text-align: center; vertical-align: middle; }
 
-#VNC_records, #VNC_screen { vertical-align: top; }
+#VNC_records, #VNC_screen, #VNC_default_video { vertical-align: top; }
 
-#VNC_records { display: none; text-align: center; z-index: 0}
+#VNC_records, #VNC_default_video { display: none; text-align: center; z-index: 0}
 #VNC_screen { display: block; white-space:nowrap; padding: 0px; margin-left: auto; margin-right: auto; text-align: center; vertical-align: top; z-index: 1}
 #VNC_canvas { display: none; padding: 0px; margin: 0px; border: 0px; }
 #VNC_canvas_backup { display: block; padding: 0px; margin: 0px; border: 0px; }
