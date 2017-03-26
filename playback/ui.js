@@ -1182,6 +1182,7 @@ function show_records_list() {
   if (res === false) {
     document.body.style.overflow = 'auto';
     vnc_records.style.height = 'auto';
+    play_bar.style.display = 'none';
   }
 
   var tmp = fullscreen_input && window.innerWidth < screen.width ? window.innerWidth : window.innerWidth - 30;
