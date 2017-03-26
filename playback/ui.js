@@ -1187,6 +1187,8 @@ function show_records_list() {
     document.body.style.overflow = 'auto';
     vnc_records.style.height = 'auto';
     play_bar.style.display = 'none';
+    fs_btn.style.display = 'none';
+    more_btn.style.display = 'none';
     fullscreen_disabled = 1;
   }
 
