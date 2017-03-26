@@ -307,6 +307,7 @@ function find_full_frame(iteration, frame_idx) {
     }
 
     vnc_status.textContent = "Draw Cover Frame";
+    vnc_status.style.display = 'none';
     play_bar.style.visibility = 'visible';
     draw_frame();
 
@@ -697,8 +698,6 @@ function start(clean, prev_play_stats, speed) {
     mode = 'realtime';
 
   if (stats !== playStats.RUNNING) {
-    vnc_status.style.display = 'none';
-
     if (fullscreen)
       set_fs();
 
@@ -1063,7 +1062,7 @@ function handle_framedata(uri) {
 
   index = parseInt(uri.substring(uri.lastIndexOf(".")+1));
 
-  console.info("part: " + index);
+  vnc_status.textContent = "data (part " + index + ") Loaded ...";
 
   if (typeof(VNC_frame_data_compressed) !== 'undefined'
     && typeof(VNC_frame_data_size) !== 'undefined'
@@ -1171,6 +1170,8 @@ function load_framedata(part) {
   if (typeof(part) === 'undefined')
     part = next_data_slice;
 
+  vnc_status.textContent = "Loading data (part " + (part+1) + ") ...";
+
   uri = get_uri(fname, part);
   if (uri === prev_uri) {
     console.info("Ignore duplicated loading...");
@@ -1204,7 +1205,7 @@ function show_default_video() {
 }
 
 window.onscriptsload = function () {
-  vnc_status.textContent = "Loaded";
+  vnc_status.textContent = "Player Loaded ...";
 
   if (!has_record_list())
     more_btn.style.display = "none";
@@ -1219,7 +1220,7 @@ window.onscriptsload = function () {
 
 function load_record(fname) {
   short_fname = fname.replace(/^(ftp|http|https|file):.*\//,"");
-  vnc_status.textContent = "Loading ...";
+  vnc_status.textContent = "Loading Player ...";
 
   if (first_load === 1) {
     // Load supporting scripts
@@ -1269,6 +1270,8 @@ function arr2str(uint8array) {
 }
 
 function decompress(data, size, slice_str) {
+  vnc_status.textContent = "Decompressing ...";
+
   var zlib = new Inflator.Inflate();
 
   //console.info("base64 encoded data size: " + data.length);
