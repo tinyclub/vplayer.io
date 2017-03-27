@@ -89,7 +89,7 @@ var stopped_by_me = 0;
 
 var prev_uri = "";
 
-var record_dir = "" + DATA_INCLUDE_URI + "recordings";
+var record_dir = "" + DATA_INCLUDE_URI + "recordings/";
 
 prev_canvas_height = default_canvas_height;
 vnc_canvas.height = default_canvas_height;
