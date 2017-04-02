@@ -481,8 +481,11 @@ function __start() {
 
   check_load_framedata();
 
-  if (skipframes <= 0 && full_frame_found)
+  if (skipframes <= full_frame_idx && full_frame_found) {
+    vnc_audio.skipTo(0);
     vnc_audio.play();
+  }
+
   next_iteration();
 }
 
@@ -732,8 +735,10 @@ function track_stop(touch, e) {
 
   track_bar_stats = trackStats.DOWN;
   prev_play_stats = play_stats;
-  if ((frame_idx < frame_idx_max) && running())
+  if ((frame_idx < frame_idx_max) && running()) {
+    vnc_audio.pause();
     stop();
+  }
 
   if (touch) {
     var evt = window.event || e;
@@ -841,11 +846,10 @@ function track_start(touch) {
   track_bar.disabled = true;
   track_bar_stats = trackStats.UP;
 
-  vnc_audio.pause();
-  vnc_audio.skipTo(skipframes / (frame_idx_max + 1));
-
   if (frame_idx > skipframes)
      finish();
+
+  vnc_audio.skipTo(skipframes / (frame_idx_max + 1));
   start();
 }
 
@@ -972,6 +976,7 @@ function finish() {
     rfb.get_keyboard().ungrab();
   }
 
+  vnc_audio.skipTo(1);
   play_stats = playStats.FINISH;
   frame_idx = 0;
 }
