@@ -5,6 +5,8 @@
  * Version: 0.1
  */
 
+var vnc_audio = undefined;
+
 // play Stats
 var playStats = {
   INIT: 0,
@@ -478,6 +480,9 @@ function __start() {
   speedup();
 
   check_load_framedata();
+
+  if (skipframes <= 0 && full_frame_found)
+    vnc_audio.play();
   next_iteration();
 }
 
@@ -491,6 +496,7 @@ function stop(str) {
 
   if (ftime.style.color !== '#666')
     ftime.style.color = '#666';
+  vnc_audio.pause();
 }
 
 function __stop() {
@@ -676,6 +682,10 @@ function restore() {
   ftime.style.color = '#0a0';
 
   check_load_framedata();
+
+  if (mode === 'realtime')
+    vnc_audio.playPause();
+
   queue_next_packet();
 }
 
@@ -830,6 +840,10 @@ function track_start(touch) {
 
   track_bar.disabled = true;
   track_bar_stats = trackStats.UP;
+
+  vnc_audio.pause();
+  vnc_audio.skipTo(skipframes / (frame_idx_max + 1));
+
   if (frame_idx > skipframes)
      finish();
   start();
@@ -1150,6 +1164,24 @@ function check_load_framedata() {
   load_framedata(next_data_slice);
 }
 
+function get_audio_uri(fname) {
+  var uri;
+
+  raw_fname = fname.replace(".zb64", "").replace(".slice", "");
+
+  //console.info("short_fname: " + short_fname + " fname: " + fname);
+  if (short_fname === fname) {
+    if (record_dir.match(/^(http|https|ftp|file):\/\//))
+      uri = '' + record_dir + '/' + raw_fname + ".mp3";
+    else
+      uri = '' + INCLUDE_URI + record_dir + '/' + raw_fname + ".mp3";
+  } else {
+    uri = raw_fname + ".mp3";
+  }
+
+  return uri;
+}
+
 function get_uri(fname, part) {
   var uri;
 
@@ -1285,6 +1317,7 @@ function decompress(data, size, slice_str) {
 }
 
 function reset_framedata() {
+  vnc_audio = undefined;
   VNC_frame_data = undefined;
   VNC_frame_data = [];
   VNC_frame_data_size = undefined;
@@ -1413,6 +1446,19 @@ fname = null;
 if (typeof(DATA_URI) !== 'undefined' && DATA_URI !== '')
   fname = DATA_URI;
 fname = WebUtil.getQueryVar('data', fname);
+
+// Init audiojs
+audiojs.events.ready(function() {
+  audios = audiojs.createAll();
+  vnc_audio = audios[0];
+
+  if (fname) {
+    audio_uri = get_audio_uri(fname);
+    vnc_audio.load(audio_uri);
+  }
+
+  vnc_audio.wrapper.style.display = 'none';
+});
 
 if (fname) {
   load_record(fname);
