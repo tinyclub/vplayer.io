@@ -1262,8 +1262,16 @@ window.onscriptsload = function () {
   }
 }
 
+function load_audio() {
+  if (fname) {
+    audio_uri = get_audio_uri(fname);
+    console.info("Loading audio....");
+    vnc_audio.load(audio_uri);
+  }
+}
+
 function load_record(fname) {
-  short_fname = fname.replace(/^(ftp|http|https|file):.*\//,"");
+  console.info("Loading video....");
   vnc_status.textContent = "Loading Player ...";
 
   if (first_load === 1) {
@@ -1291,6 +1299,8 @@ function load(index, suffix) {
     fname = record[index][0] + suffix;
 
   fname = fname.replace(/\/$/,"");
+  short_fname = fname.replace(/^(ftp|http|https|file):.*\//,"");
+  setTimeout(load_audio, 1);
 
   __finish();
   //console.info("Loading ...... " + fname);
@@ -1329,7 +1339,6 @@ function decompress(data, size, slice_str) {
 }
 
 function reset_framedata() {
-  vnc_audio = undefined;
   VNC_frame_data = undefined;
   VNC_frame_data = [];
   VNC_frame_data_size = undefined;
@@ -1458,21 +1467,17 @@ fname = null;
 if (typeof(DATA_URI) !== 'undefined' && DATA_URI !== '')
   fname = DATA_URI;
 fname = WebUtil.getQueryVar('data', fname);
+if (fname)
+  short_fname = fname.replace(/^(ftp|http|https|file):.*\//,"");
 
 // Init audiojs
-audiojs.events.ready(function() {
-  audios = audiojs.createAll();
-  vnc_audio = audios[0];
+audios = audiojs.createAll();
+vnc_audio = audios[0];
 
-  if (typeof(vnc_audio) !== 'undefined') {
-    if (fname) {
-      audio_uri = get_audio_uri(fname);
-      vnc_audio.load(audio_uri);
-    }
-
-    vnc_audio.wrapper.style.display = 'none';
-  }
-});
+if (typeof(vnc_audio) !== 'undefined') {
+  vnc_audio.wrapper.style.display = 'none';
+  setTimeout(load_audio, 1);
+}
 
 if (fname) {
   vnc_default_video.innerHTML = '';
