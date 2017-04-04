@@ -977,6 +977,7 @@ function finish() {
   }
 
   vnc_audio.skipTo(1);
+  vnc_audio.pause();
   play_stats = playStats.FINISH;
   frame_idx = 0;
 }
