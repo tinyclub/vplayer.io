@@ -481,7 +481,7 @@ function __start() {
 
   check_load_framedata();
 
-  if (skipframes <= full_frame_idx && full_frame_found) {
+  if (skipframes <= full_frame_idx && full_frame_found && vnc_audio !== 'undefined') {
     vnc_audio.skipTo(0);
     vnc_audio.play();
   }
@@ -499,7 +499,8 @@ function stop(str) {
 
   if (ftime.style.color !== '#666')
     ftime.style.color = '#666';
-  vnc_audio.pause();
+  if (vnc_audio !== 'undefined')
+    vnc_audio.pause();
 }
 
 function __stop() {
@@ -686,7 +687,7 @@ function restore() {
 
   check_load_framedata();
 
-  if (mode === 'realtime')
+  if (mode === 'realtime' && vnc_audio !== 'undefined')
     vnc_audio.playPause();
 
   queue_next_packet();
@@ -736,7 +737,8 @@ function track_stop(touch, e) {
   track_bar_stats = trackStats.DOWN;
   prev_play_stats = play_stats;
   if ((frame_idx < frame_idx_max) && running()) {
-    vnc_audio.pause();
+    if (vnc_audio !== 'undefined')
+      vnc_audio.pause();
     stop();
   }
 
@@ -847,9 +849,9 @@ function track_start(touch) {
   track_bar_stats = trackStats.UP;
 
   if (frame_idx > skipframes)
-     finish();
-
-  vnc_audio.skipTo(skipframes / (frame_idx_max + 1));
+    finish();
+  if (vnc_audio !== 'undefined')
+    vnc_audio.skipTo(skipframes / (frame_idx_max + 1));
   start();
 }
 
@@ -976,8 +978,10 @@ function finish() {
     rfb.get_keyboard().ungrab();
   }
 
-  vnc_audio.skipTo(1);
-  vnc_audio.pause();
+  if (vnc_audio !== 'undefined') {
+    vnc_audio.skipTo(1);
+    vnc_audio.pause();
+  }
   play_stats = playStats.FINISH;
   frame_idx = 0;
 }
@@ -1173,7 +1177,7 @@ function check_load_framedata() {
 function get_audio_uri(fname) {
   var uri;
 
-  raw_fname = fname.replace(".zb64", "").replace(".slice", "");
+  raw_fname = fname.replace(".nvz", "").replace(".nvs", "");
 
   //console.info("short_fname: " + short_fname + " fname: " + fname);
   if (short_fname === fname) {
@@ -1248,12 +1252,14 @@ window.onscriptsload = function () {
   if (!has_record_list())
     more_btn.style.display = "none";
 
-  if (fname)
+  if (fname) {
     init_framedata();
-  else if (has_record_list())
+  } else if (has_record_list()) {
+    vnc_default_video.innerHTML = '';
     show_records_list();
-  else
+  } else {
     show_default_video();
+  }
 }
 
 function load_record(fname) {
@@ -1458,15 +1464,18 @@ audiojs.events.ready(function() {
   audios = audiojs.createAll();
   vnc_audio = audios[0];
 
-  if (fname) {
-    audio_uri = get_audio_uri(fname);
-    vnc_audio.load(audio_uri);
-  }
+  if (vnc_audio !== 'undefined') {
+    if (fname) {
+      audio_uri = get_audio_uri(fname);
+      vnc_audio.load(audio_uri);
+    }
 
-  vnc_audio.wrapper.style.display = 'none';
+    vnc_audio.wrapper.style.display = 'none';
+  }
 });
 
 if (fname) {
+  vnc_default_video.innerHTML = '';
   load_record(fname);
 } else {
   load_records();

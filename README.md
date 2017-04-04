@@ -17,17 +17,17 @@ In additional, [pyvnc2swf][3] and [Cloud Ubuntu][4] are enhanced to easier the n
 
 Use `pyvnc2swf` or `tinylab/cloud-ubuntu-web` to record the VNC sessions to `recordings/` and then, play it with such url in any modern web browser.
 
-Use `vplayer.io demonstration` as an example. The recorded session is saved as `recordings/vplayer.io.zb64` and/or sliced to `recordings/vplayer.io.slice*` for better access speed.
+Use `vplayer.io demonstration` as an example. The recorded session is saved as `recordings/vplayer.io.nvz` and/or sliced to `recordings/vplayer.io.nvs*` for better access speed.
 
 1. Play the video
-    * Slow: <http://vplayer.io?data=vplayer.io.zb64>
-    * Fast: <http://vplayer.io?data=vplayer.io.slice>
+    * Slow: <http://vplayer.io?data=vplayer.io.nvz>
+    * Fast: <http://vplayer.io?data=vplayer.io.nvs>
 
 2. Embed the video in a web page
 
     There is an example: <http://vplayer.io/examples/embed.html>:
 
-        <iframe src="http://vplayer.io?data=vplayer.io.slice&f=1" width="100%" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" border="0" allowfullscreen></iframe>
+        <iframe src="http://vplayer.io?data=vplayer.io.nvs&f=1" width="100%" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" border="0" allowfullscreen></iframe>
 
 3. Auto resize the video size
 
