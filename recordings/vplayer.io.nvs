@@ -1,0 +1,12 @@
+var VNC_frame_category = '';
+var VNC_frame_slice_str = '=-+-+=';
+var VNC_frame_title = 'vplayer.io demonstration';
+var VNC_frame_create = '1491032121.278425';
+var VNC_frame_author = 'Wu Zhangjin <wuzhangjin@gmail.com>';
+var VNC_frame_encoding = 'binary';
+var VNC_frame_length = 170;
+var VNC_frame_time = '00:00:42';
+var VNC_frame_size = '2.4M';
+var VNC_frame_tags = 'noVNC, vplayer';
+var VNC_frame_desc = 'vplayer.io is a new video player, it can play the recorded VNC sessions in noVNC format!';
+var VNC_frame_slices = 10;
