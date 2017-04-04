@@ -481,7 +481,7 @@ function __start() {
 
   check_load_framedata();
 
-  if (skipframes <= full_frame_idx && full_frame_found && vnc_audio !== 'undefined') {
+  if (skipframes <= full_frame_idx && full_frame_found && typeof(vnc_audio) !== 'undefined') {
     vnc_audio.skipTo(0);
     vnc_audio.play();
   }
@@ -499,7 +499,7 @@ function stop(str) {
 
   if (ftime.style.color !== '#666')
     ftime.style.color = '#666';
-  if (vnc_audio !== 'undefined')
+  if (typeof(vnc_audio) !== 'undefined')
     vnc_audio.pause();
 }
 
@@ -687,7 +687,7 @@ function restore() {
 
   check_load_framedata();
 
-  if (mode === 'realtime' && vnc_audio !== 'undefined')
+  if (mode === 'realtime' && typeof(vnc_audio) !== 'undefined')
     vnc_audio.playPause();
 
   queue_next_packet();
@@ -737,7 +737,7 @@ function track_stop(touch, e) {
   track_bar_stats = trackStats.DOWN;
   prev_play_stats = play_stats;
   if ((frame_idx < frame_idx_max) && running()) {
-    if (vnc_audio !== 'undefined')
+    if (typeof(vnc_audio) !== 'undefined')
       vnc_audio.pause();
     stop();
   }
@@ -850,7 +850,7 @@ function track_start(touch) {
 
   if (frame_idx > skipframes)
     finish();
-  if (vnc_audio !== 'undefined')
+  if (typeof(vnc_audio) !== 'undefined')
     vnc_audio.skipTo(skipframes / (frame_idx_max + 1));
   start();
 }
@@ -978,7 +978,7 @@ function finish() {
     rfb.get_keyboard().ungrab();
   }
 
-  if (vnc_audio !== 'undefined') {
+  if (typeof(vnc_audio) !== 'undefined') {
     vnc_audio.skipTo(1);
     vnc_audio.pause();
   }
@@ -1069,7 +1069,7 @@ function update_frameinfo() {
   frame_info['title'] = short_fname;
 
   for (var k in frame_info) {
-    if (typeof("VNC_frame_" + k) !== "undefined")
+    if (typeof("VNC_frame_" + k) !== "'undefined'")
       frame_info[k] = eval("VNC_frame_" + k);
   }
 
@@ -1108,9 +1108,9 @@ function handle_framedata(uri) {
 
   VNC_frame_data = VNC_frame_data.concat(VNC_frame_data_slice);
   curr_frame_length = VNC_frame_data.length - 1;
-  VNC_frame_data_slice = undefined;
-  VNC_frame_data_size = undefined;
-  VNC_frame_data_compressed = undefined;
+  VNC_frame_data_slice = 'undefined';
+  VNC_frame_data_size = 'undefined';
+  VNC_frame_data_compressed = 'undefined';
 
   //console.info("data.length " + VNC_frame_data.length);
   //console.info("curr_frame_length: " + curr_frame_length + " skipframes: " + skipframes);
@@ -1464,7 +1464,7 @@ audiojs.events.ready(function() {
   audios = audiojs.createAll();
   vnc_audio = audios[0];
 
-  if (vnc_audio !== 'undefined') {
+  if (typeof(vnc_audio) !== 'undefined') {
     if (fname) {
       audio_uri = get_audio_uri(fname);
       vnc_audio.load(audio_uri);
