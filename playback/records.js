@@ -39,10 +39,17 @@ function list_records(theme) {
   //  data.push("<th>" + head[i] + "</th>\n");
   //  data.push("<th>" + head[i] + "</th>\n");
   //data.push("<th>" + head[6] + "</th>\n"); // category
-  data.push("<th>" + head[1] + "</th>\n"); // title
-  //data.push("<th>" + head[2] + "</th>\n"); // size
-  data.push("<th>" + head[3] + "</th>\n"); // time
-  data.push("<th>" + head[8] + "</th>\n"); // desc
+  if (theme) {
+      data.push("<th> Play </th>\n"); // play
+      //data.push("<th>" + head[2] + "</th>\n"); // size
+      data.push("<th>" + head[3] + "</th>\n"); // time
+      data.push("<th>" + head[1] + "</th>\n"); // title
+  } else {
+      data.push("<th>" + head[1] + "</th>\n"); // title
+      //data.push("<th>" + head[2] + "</th>\n"); // size
+      data.push("<th>" + head[3] + "</th>\n"); // time
+      data.push("<th>" + head[8] + "</th>\n"); // desc
+  }
   data.push("<th>" + head[5] + "</th>\n"); // author
   data.push("</tr>\n");
 
@@ -72,9 +79,16 @@ function list_records(theme) {
     //for (j = 1; j < row.length - 1; j++)
     //  data.push("<td>" + row[j] + "</td>\n");
 
-    //data.push("<td class='size'>" + row[2] + "</td>\n"); // size
-    data.push("<td class='time'>" + row[3] + "</td>\n"); // time
-    data.push("<td class='desc'>" + row[8] + "</td>\n"); // desc
+
+    if (theme) {
+       data.push("<td class='desc'>" + row[1] + "</td>\n"); // title
+       //data.push("<td class='size'>" + row[2] + "</td>\n"); // size
+       data.push("<td class='time'>" + row[3] + "</td>\n"); // time
+    } else {
+       //data.push("<td class='size'>" + row[2] + "</td>\n"); // size
+       data.push("<td class='time'>" + row[3] + "</td>\n"); // time
+       data.push("<td class='title'>" + row[8] + "</td>\n"); // desc
+    }
     data.push("<td class='author'>" + row[5] + "</td>\n"); // author
 
     data.push("</tr>\n");
