@@ -1,21 +1,22 @@
-#VNC_records { height: 500px; max-width: 960px; margin-bottom: 16px; overflow: auto; font-size: 1em; }
+#VNC_records table { padding: 1.2em; margin: auto; overflow: auto; text-align: center; max-width: 960px; font-family: 'Lucida Grande', 'Helvetica Neue', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', 'WenQuanYi Micro Hei', sans-serif, 'SimSun', "宋体", 'Heiti', "黑体"; font-size: 1em; *font-size: small; -moz-transform: scale(1.0); -moz-transform-origin: center top 0; zoom: 1.0; } 
 
-#VNC_records a { font-weight: 400; font-size: 100%; text-decoration: none; outline: none; }
-#VNC_records table { border: 1px solid #333; border-spacing: 0; border-collapse: collapse; width: 100%; }
+#VNC_records table { border: 1px solid #333; border-spacing: 0; border-collapse: collapse; width: 96%; }
 #VNC_records th, td { font-size: 95%; padding-left: 2px; padding-right: 2px; padding-top: 10px; padding-bottom: 10px;
      border: 1px solid #aaa; display: table-cell;
-     text-align: center; max-width: 100px; }
+     text-align: center; max-width: 60px; }
+#VNC_records td { overflow: hidden; text-overflow: ellipsis }
 #VNC_records th { font-size: 90%; font-weight: 600; }
-#VNC_records td.desc { font-size: 85%; max-width: 150px; }
+#VNC_records td.desc { font-size: 80%; max-width: 120px; }
 #VNC_records td.author { font-style: italic; }
+#VNC_records td.time { max-width: 30px; font-size: 80%; }
 #VNC_records tr.head { background-color: #ccc; }
 #VNC_records tr.odd { background-color: #eee; }
 #VNC_records tr.even { background-color: #fff; }
 
 @media (max-width: 999px) {
-    body {
+    #VNC_records table {
         -moz-transform: scale(1.5);
         -moz-transform-origin: center top 0;
         zoom: 1.5
     }
-  }
+}

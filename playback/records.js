@@ -38,9 +38,9 @@ function list_records(theme) {
   //for (i = 1; i < head.length - 1; i++)
   //  data.push("<th>" + head[i] + "</th>\n");
   //  data.push("<th>" + head[i] + "</th>\n");
-  data.push("<th>" + head[6] + "</th>\n"); // category
+  //data.push("<th>" + head[6] + "</th>\n"); // category
   data.push("<th>" + head[1] + "</th>\n"); // title
-  data.push("<th>" + head[2] + "</th>\n"); // size
+  //data.push("<th>" + head[2] + "</th>\n"); // size
   data.push("<th>" + head[3] + "</th>\n"); // time
   data.push("<th>" + head[8] + "</th>\n"); // desc
   data.push("<th>" + head[5] + "</th>\n"); // author
@@ -57,7 +57,7 @@ function list_records(theme) {
     row = record[i];
 
     data.push("<td> " + i + " </td>\n");
-    data.push("<td>" + row[6] + "</td>\n"); // category
+    //data.push("<td>" + row[6] + "</td>\n"); // category
 
     down_url = record_dir + "/" + row[0];
     if (theme) {
@@ -68,11 +68,11 @@ function list_records(theme) {
     }
 
     // time from timestamp in millseconds to localtime format
-    row[4] = (new Date(parseFloat(row[4])*1000)).toLocaleString();
+    //row[4] = (new Date(parseFloat(row[4])*1000)).toLocaleString();
     //for (j = 1; j < row.length - 1; j++)
     //  data.push("<td>" + row[j] + "</td>\n");
 
-    data.push("<td class='size'>" + row[2] + "</td>\n"); // size
+    //data.push("<td class='size'>" + row[2] + "</td>\n"); // size
     data.push("<td class='time'>" + row[3] + "</td>\n"); // time
     data.push("<td class='desc'>" + row[8] + "</td>\n"); // desc
     data.push("<td class='author'>" + row[5] + "</td>\n"); // author
