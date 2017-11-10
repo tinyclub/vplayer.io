@@ -32,12 +32,18 @@ function list_records(theme) {
   data.push("<table>\n")
 
   data.push("<tr class='head'>\n");
-  data.push("<th> Play </th>\n");
-  data.push("<th> No. </th>\n");
+  data.push("<th></th>\n");
 
   var i, head = record[0];
-  for (i = 1; i < head.length - 1; i++)
-    data.push("<th>" + head[i] + "</th>\n");
+  //for (i = 1; i < head.length - 1; i++)
+  //  data.push("<th>" + head[i] + "</th>\n");
+  //  data.push("<th>" + head[i] + "</th>\n");
+  data.push("<th>" + head[6] + "</th>\n"); // category
+  data.push("<th>" + head[1] + "</th>\n"); // title
+  data.push("<th>" + head[2] + "</th>\n"); // size
+  data.push("<th>" + head[3] + "</th>\n"); // time
+  data.push("<th>" + head[8] + "</th>\n"); // desc
+  data.push("<th>" + head[5] + "</th>\n"); // author
   data.push("</tr>\n");
 
   var bg, row, j, play_url, down_url;
@@ -50,20 +56,26 @@ function list_records(theme) {
 
     row = record[i];
 
+    data.push("<td> " + i + " </td>\n");
+    data.push("<td>" + row[6] + "</td>\n"); // category
+
     down_url = record_dir + "/" + row[0];
     if (theme) {
       data.push("<td><input type='radio' name='session' onclick='load(" + i + ");'></td>\n");
     } else {
       play_url = player + "?data=" + row[0];
-      data.push("<td><a href='" + play_url + "'>&gt;</a></td>\n");
+      data.push("<td><a href='" + play_url + "'>"+ row[1] +"</a></td>\n");
     }
-
-    data.push("<td> " + i + " </td>\n");
 
     // time from timestamp in millseconds to localtime format
     row[4] = (new Date(parseFloat(row[4])*1000)).toLocaleString();
-    for (j = 1; j < row.length - 1; j++)
-      data.push("<td>" + row[j] + "</td>\n");
+    //for (j = 1; j < row.length - 1; j++)
+    //  data.push("<td>" + row[j] + "</td>\n");
+
+    data.push("<td class='size'>" + row[2] + "</td>\n"); // size
+    data.push("<td class='time'>" + row[3] + "</td>\n"); // time
+    data.push("<td class='desc'>" + row[8] + "</td>\n"); // desc
+    data.push("<td class='author'>" + row[5] + "</td>\n"); // author
 
     data.push("</tr>\n");
   }
